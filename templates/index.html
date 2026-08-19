@@ -1,659 +1,88 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>BURGER LAB | Hamburguesas Artesanales</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #0e0e0e;
-            color: #ffffff;
-            line-height: 1.6;
-        }
-
-        /* =========================
-           NAVBAR
-        ========================== */
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(14, 14, 14, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: auto;
-            padding: 18px 25px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: #ff7a00;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a:hover {
-            color: #ff7a00;
-        }
-
-        .cart {
-            background: #ff7a00;
-            color: #111;
-            padding: 10px 16px;
-            border-radius: 30px;
-            font-weight: bold;
-        }
-
-        /* =========================
-           HERO
-        ========================== */
-
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 25px;
-            background:
-                radial-gradient(circle at 85% 25%, rgba(255, 122, 0, 0.25), transparent 30%),
-                radial-gradient(circle at 20% 80%, rgba(255, 50, 50, 0.12), transparent 25%),
-                #0e0e0e;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .hero-text small {
-            color: #ff7a00;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 3px;
-        }
-
-        .hero-text h1 {
-            font-size: clamp(3rem, 7vw, 6rem);
-            line-height: 0.95;
-            margin: 18px 0;
-        }
-
-        .hero-text h1 span {
-            color: #ff7a00;
-        }
-
-        .hero-text p {
-            color: #bdbdbd;
-            max-width: 520px;
-            margin-bottom: 30px;
-            font-size: 1.05rem;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 24px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .btn-primary {
-            background: #ff7a00;
-            color: #111;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 122, 0, 0.25);
-        }
-
-        .btn-secondary {
-            border: 1px solid #444;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            border-color: #ff7a00;
-            color: #ff7a00;
-        }
-
-        /* =========================
-           BURGER VISUAL
-        ========================== */
-
-        .burger-area {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .burger {
-            width: 310px;
-            position: relative;
-            animation: floatBurger 4s ease-in-out infinite;
-        }
-
-        @keyframes floatBurger {
-            0%, 100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-12px);
-            }
-        }
-
-        .bun-top {
-            height: 95px;
-            border-radius: 150px 150px 35px 35px;
-            background: linear-gradient(145deg, #f5a623, #c96505);
-            position: relative;
-            box-shadow: inset 0 -12px 0 rgba(0,0,0,0.15);
-        }
-
-        .seed {
-            position: absolute;
-            width: 10px;
-            height: 5px;
-            border-radius: 50%;
-            background: #ffe5a0;
-        }
-
-        .s1 { top: 25px; left: 55px; transform: rotate(25deg); }
-        .s2 { top: 18px; left: 115px; transform: rotate(-20deg); }
-        .s3 { top: 30px; left: 170px; transform: rotate(25deg); }
-        .s4 { top: 18px; left: 225px; transform: rotate(-15deg); }
-        .s5 { top: 45px; left: 90px; transform: rotate(20deg); }
-        .s6 { top: 45px; left: 210px; transform: rotate(-25deg); }
-
-        .lettuce {
-            height: 20px;
-            background: #78a83b;
-            border-radius: 10px;
-        }
-
-        .cheese {
-            height: 25px;
-            background: #ffc400;
-            clip-path: polygon(
-                0 0,
-                100% 0,
-                100% 70%,
-                85% 100%,
-                70% 65%,
-                55% 100%,
-                40% 65%,
-                25% 100%,
-                10% 65%,
-                0 100%
-            );
-        }
-
-        .meat {
-            height: 58px;
-            background:
-                repeating-linear-gradient(
-                    15deg,
-                    #52200f,
-                    #52200f 10px,
-                    #3a140a 10px,
-                    #3a140a 20px
-                );
-            border-radius: 15px;
-        }
-
-        .tomato {
-            height: 18px;
-            background: #d83122;
-            border-radius: 8px;
-        }
-
-        .bun-bottom {
-            height: 42px;
-            background: linear-gradient(145deg, #d57a19, #a64c05);
-            border-radius: 10px 10px 28px 28px;
-        }
-
-        /* =========================
-           MENU
-        ========================== */
-
-        .menu {
-            padding: 90px 25px;
-            background: #151515;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title small {
-            color: #ff7a00;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            margin-top: 8px;
-        }
-
-        .menu-grid {
-            max-width: 1100px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-        }
-
-        .card {
-            background: #1d1d1d;
-            border: 1px solid #2d2d2d;
-            border-radius: 22px;
-            padding: 25px;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: #ff7a00;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-        }
-
-        .food-icon {
-            font-size: 4rem;
-            margin-bottom: 10px;
-        }
-
-        .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
-        }
-
-        .card p {
-            color: #aaa;
-            font-size: 0.92rem;
-            margin-bottom: 20px;
-        }
-
-        .card-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price {
-            color: #ff7a00;
-            font-size: 1.2rem;
-            font-weight: 900;
-        }
-
-        .order {
-            background: #ffffff;
-            color: #111;
-            border: none;
-            padding: 9px 14px;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .order:hover {
-            background: #ff7a00;
-        }
-
-        /* =========================
-           PROMO
-        ========================== */
-
-        .promo {
-            max-width: 1100px;
-            margin: 90px auto;
-            padding: 45px;
-            border-radius: 28px;
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff7a00,
-                    #e34c00
-                );
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .promo h2 {
-            color: #111;
-            font-size: 2rem;
-        }
-
-        .promo p {
-            color: #351300;
-            margin-top: 6px;
-        }
-
-        .promo-button {
-            background: #111;
-            color: white;
-            padding: 14px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        /* =========================
-           FOOTER
-        ========================== */
-
-        footer {
-            background: #090909;
-            border-top: 1px solid #242424;
-            padding: 35px 25px;
-            text-align: center;
-            color: #888;
-        }
-
-        footer strong {
-            color: #ff7a00;
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================== */
-
-        @media (max-width: 850px) {
-
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-text p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .buttons {
-                justify-content: center;
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .promo {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 450px) {
-
-            .hero {
-                padding-top: 40px;
-            }
-
-            .burger {
-                width: 260px;
-            }
-
-            .section-title h2 {
-                font-size: 2rem;
-            }
-
-            .promo {
-                margin: 60px 20px;
-                padding: 30px;
-            }
-        }
-    </style>
+    <title>Nuevas Tecnologias</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/general.css') }}">
 </head>
 
 <body>
+    <H1>Repaso de Etiquetas</H1>
+    <br> <!--crear un salto de linea-->
+    <hr> <!--para crear una linea divisoria-->
+    <p> {{ person }} </p> <!--No conctamos con python-->
 
-    <!-- NAVBAR -->
-    <header>
-        <nav>
-            <div class="logo">
-                BURGER<span>LAB</span>
-            </div>
+    <a href="https://www.konradlorenz.edu.co/" target="_blank" rel="noopener noreferrer">Konrad Lorenz</a>
+    <!-- Abre el enlace en una pestaña nueva de forma segura usando target y rel -->
 
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#menu">Menú</a></li>
-                <li><a href="#promocion">Promoción</a></li>
-            </ul>
+    <br>
 
-            <a href="#menu" class="cart">🍔 Pedir ahora</a>
-        </nav>
-    </header>
+    <img src="/static/imagenes/tipos-ruta.jpg"
+        alt="Imagen demostrativa de la diferencia entre una ruta Absoluta y Relativas" width="50%"> <!--Agregamos Imagen enlace -->
+    
+        <br>
 
-    <!-- HERO -->
-    <main>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Nombres</td>
+            <td>Apellidos</td>
+            <td>Codigo</td>
+            <td>Ncionalidad</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td><a href="https://es.wikipedia.org/wiki/Colombia" target="_blank" rel="noopener noreferrer"><img src="/static/imagenes/colombiua.png" alt="Bandera de Colombia" height="30px"></a></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td><a href="https://es.wikipedia.org/wiki/Venezuela" target="_blank" rel="noopener noreferrer"><img src="/static/imagenes/Venezuala.webp" alt="Bandera de Venezuela" height="30px"></a></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td><a href="https://es.wikipedia.org/wiki/Brasil" target="_blank" rel="noopener noreferrer"><img src="/static/imagenes/brasil.webp" alt="Bandera de Brasil" height="30px"></a></td>
+        </tr>
+    </table>
 
-        <section class="hero" id="inicio">
+    <a href="/templates/ejercicioClase.html" target="_blank" rel="noopener noreferrer">Ejercicio en CLase</a>
 
-            <div class="hero-container">
 
-                <div class="hero-text">
+    <H1>HTML</H1>
+    <H2>Listas y Tablas en HTML</H2>
+    <br>
+    <P>actividad</P>
+    <br>
 
-                    <small>Hamburguesas artesanales</small>
+    <table>
+        <tr>
+            <ol>Don Quijote - Miguel de Cervantes</ol>
+            <ol>Cien años de Soledad - Gabriel Garcia Marques</ol>
+        </tr>
+    </table>
 
-                    <h1>
-                        SABOR<br>
-                        <span>SIN LÍMITES.</span>
-                    </h1>
+    <br>
 
-                    <p>
-                        Hamburguesas hechas al momento, ingredientes frescos
-                        y combinaciones creadas para quienes quieren algo
-                        diferente.
-                    </p>
-
-                    <div class="buttons">
-
-                        <a href="#menu" class="btn btn-primary">
-                            Ver menú
-                        </a>
-
-                        <a href="#promocion" class="btn btn-secondary">
-                            Ver promoción
-                        </a>
-
-                    </div>
-
-                </div>
-
-                <!-- HAMBURGUESA CSS -->
-                <div class="burger-area">
-
-                    <div class="burger">
-
-                        <div class="bun-top">
-                            <span class="seed s1"></span>
-                            <span class="seed s2"></span>
-                            <span class="seed s3"></span>
-                            <span class="seed s4"></span>
-                            <span class="seed s5"></span>
-                            <span class="seed s6"></span>
-                        </div>
-
-                        <div class="lettuce"></div>
-
-                        <div class="cheese"></div>
-
-                        <div class="meat"></div>
-
-                        <div class="tomato"></div>
-
-                        <div class="lettuce"></div>
-
-                        <div class="bun-bottom"></div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- MENU -->
-        <section class="menu" id="menu">
-
-            <div class="section-title">
-                <small>Nuestro menú</small>
-                <h2>Elige tu favorita</h2>
-            </div>
-
-            <div class="menu-grid">
-
-                <article class="card">
-
-                    <div class="food-icon">🍔</div>
-
-                    <h3>Classic Lab</h3>
-
-                    <p>
-                        Carne artesanal, queso cheddar,
-                        lechuga, tomate y salsa de la casa.
-                    </p>
-
-                    <div class="card-bottom">
-                        <span class="price">$18.900</span>
-                        <button class="order">Ordenar</button>
-                    </div>
-
-                </article>
-
-                <article class="card">
-
-                    <div class="food-icon">🔥</div>
-
-                    <h3>Fire Burger</h3>
-
-                    <p>
-                        Doble carne, queso cheddar,
-                        jalapeños y salsa picante especial.
-                    </p>
-
-                    <div class="card-bottom">
-                        <span class="price">$23.900</span>
-                        <button class="order">Ordenar</button>
-                    </div>
-
-                </article>
-
-                <article class="card">
-
-                    <div class="food-icon">🥓</div>
-
-                    <h3>Bacon Boss</h3>
-
-                    <p>
-                        Carne artesanal, doble queso,
-                        tocineta crujiente y salsa BBQ.
-                    </p>
-
-                    <div class="card-bottom">
-                        <span class="price">$25.900</span>
-                        <button class="order">Ordenar</button>
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-        <!-- PROMOCIÓN -->
-        <section id="promocion">
-
-            <div class="promo">
-
-                <div>
-                    <h2>🔥 Combo Lab</h2>
-
-                    <p>
-                        Burger + papas + bebida por tiempo limitado.
-                    </p>
-                </div>
-
-                <a href="#menu" class="promo-button">
-                    Quiero mi combo
-                </a>
-
-            </div>
-
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-        <p>
-            © 2026 <strong>BURGER LAB</strong> · Proyecto académico
-            desarrollado con Flask.
-        </p>
-    </footer>
-
+    <table>
+        <tr>
+            <td>Día</td>
+            <td>Hora</td>
+        </tr>
+        <tr>
+            <td>Lunes-Viernes</td>
+            <td>08:00 - 18:00</td>
+        </tr>
+    </table>
 </body>
+
 </html>

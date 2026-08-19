@@ -1,0 +1,103 @@
+/* ==========================================
+   TIPOGRAFÍA PERSONALIZADA: Unkempt
+   ========================================== */
+.unkempt-regular {
+  font-family: "Unkempt", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.unkempt-bold {
+  font-family: "Unkempt", cursive;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ==========================================
+   1. VARIABLES GLOBALES (Personaliza tus colores y fuentes aquí)
+   ========================================== */
+:root {
+  --color-principal: #039c1c;     /* Azul principal */
+  --color-secundario: #66e932;    /* Azul claro de acento */
+  --color-fondo: #000000;         /* Fondo claro de la página */
+  --color-texto: #fcfcfc;         /* Texto oscuro para buena lectura */
+  --color-tarjeta: #6d6d6d;       /* Fondo de contenedores o cards */
+  --fuente-principal: "Unkempt", cursive;
+  --radio-borde: 8px;              /* Bordes redondeados */
+  --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================
+   2. REINICIO BÁSICO (Reset global)
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Mantiene tamaños de cajas exactos */
+}
+
+/* ==========================================
+   3. ESTILOS BASE Y TIPOGRAFÍA
+   ========================================== */
+body {
+  font-family: var(--fuente-principal);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.6;
+  padding: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-principal);
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--color-secundario);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================
+   4. COMPONENTES Y ESTRUCTURA (Para reutilizar)
+   ========================================== */
+
+/* Contenedor principal para centrar tu contenido */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Estilo para tarjetas o secciones separadas */
+.card {
+  background-color: var(--color-tarjeta);
+  padding: 20px;
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra);
+  margin-bottom: 20px;
+}
+
+/* Botón base estilizado */
+.btn {
+  display: inline-block;
+  background-color: var(--color-principal);
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radio-borde);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--color-secundario);
+  text-decoration: none;
+}
